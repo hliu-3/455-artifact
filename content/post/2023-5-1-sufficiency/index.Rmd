@@ -44,7 +44,7 @@ Now, we can finally define an estimator to be efficient if it achieves the lowes
 An estimator is considered efficient if it converges in probability to the true parameter value as the sample approaches infinity. More formally, we can say that an estimator $\hat{\theta}_n = h(W_1, W_2,\dots, W_n)$ is said to be *consistent* for $\theta$ if it converges in probability to $\theta$, that is, if for all $\epsilon > 0$, $\stackrel{lim}{n\rightarrow \infty}P(|\hat{\theta}_n-\theta|<\epsilon)=1$.
 
 
-## Introduction to Sufficiency
+# Introduction to Sufficiency
 
 A statistic is a function of some random sample of a population and we often use statistics as estimators for true population parameters since these parameters are almost always unknown. For any given random sample, there many functions of that random sample, so when we are looking for good estimators, should we be looking at each and every function of the random sample? No, instead we can look at a smaller subset of these functions of the random sample that give us the same amount of information as knowing the entire random sample. We call these statistics, sufficient statistics.
 
@@ -117,13 +117,13 @@ $$P(X_1 = k_1,...,X_n = k_n|\hat p = p_e) = \frac{p^{np_e}(1-p)^{n-np_e}}{{n \ch
 Notice that this conditional probability is not a function of $p$ indicating that $\hat p$ is a sufficient estimator for $p$. Now in this instance, the conditional probability was easy to calculate but in most cases it will not be which is why we have the following Factorization Theorem to help us.
 
 
-# Fischer's Sufficiency Theorem
+# Fischer's Factorization Theorem
 
 Given the definition of a sufficient statistic, we consider the immediate next-step question: how to propose, or prove, a sufficient statistic? Fisher's Sufficiency Theorem is a fundamental result that helps to identify sufficient statistics for a given sampling from a model. In this Section, we will explain the theorem and its implications, and then demonstrate its application using Bernoulli samples as an example.
 
-## Fischer's Sufficiency Theorem
+## The Factorization Theorem
 
-Fisher's Sufficiency Theorem states that a statistic $T(\boldsymbol{X})$ is sufficient for a parameter $\theta$ if and only if the joint probability distribution of the data $\boldsymbol{X}$ can be factored into two components:
+Fisher's Factorization Theorem states that a statistic $T(\boldsymbol{X})$ is sufficient for a parameter $\theta$ if and only if the joint probability distribution of the data $\boldsymbol{X}$ can be factored into two components:
 
 1. A function $G(T(\boldsymbol{X}), \theta)$ that depends on the data only through the sufficient statistic $T(\boldsymbol{X})$. This means that if two samples from the data of size $n$ $\boldsymbol{X}=\{x_1,x_2,\cdots,x_n\}$ and $\boldsymbol{Y}=\{y_1,y_2,\cdots,y_n\}$
 
@@ -137,14 +137,14 @@ $$
 
 where $F(\boldsymbol{X} | \theta)$ is the joint probability distribution of the data $\boldsymbol{X}$, and $G$ and $H$ are the two factorized functions.
 
-Note that if we are given a non-zero constant $c$, such that $$G(T(\boldsymbol{X}) = G(cT^\prime(\boldsymbol{X})$$, then $T^\prime(x)$ is also a sufficient statistic. One constant that is often used is the size of the sample $n$, which we can assume to be constant. 
+Note that if we are given a non-zero constant $c$, such that $$G(T(\boldsymbol{X}) = G(cT^\prime(\boldsymbol{X})$$, then $T^\prime(x)$ is also a sufficient statistic. One constant that is often used is the size of the sample $n$, which we can assume to be known. 
 
 ## Likelihood principle interpretation
 
 
 An implication of the theorem is that when using likelihood-based inference, two sets of data yielding the same value for the sufficient statistic $T(X)$ will always yield the same inferences about $\theta$. By the factorization criterion, the likelihood's dependence on $\theta$ is only in conjunction with $T(X)$. As this is the same in both cases, the dependence on θ will be the same as well, leading to identical inferences.
 
-## Proving Sufficiency using Fischer's Sufficiency Theorem
+## Proving Sufficiency using Fischer's Factorization Theorem
 
 To prove that a statistic $T(\boldsymbol{X})$ is sufficient for a parameter $\theta$, we need to show that the joint probability distribution $F(\boldsymbol{X} | \theta)$ can be factored into the two components mentioned above. If this factorization is possible, then we can conclude that $T(\boldsymbol{X})$ is sufficient for $\theta$.
 
@@ -216,7 +216,7 @@ To conclude, Fisher's Sufficiency Theorem provides a powerful tool for identifyi
 
 Now that we know how to define and prove a sufficient statistic, we conclude this project by a discussion of its utility. The Rao-Blackwell Theorem  indicates that in terms of relative efficiency, a sufficient statistic always helps improve the quality of estimators. In this section, we will explain the theorem, its connection to sufficiency, and then demonstrate its application using Normal samples with a known mean and unknown variance as an example.
 
-## Rao-Blackwell Theorem
+## Rao-Blackwell Theorem's Statement
 
 The Rao-Blackwell Theorem states that given an estimator $\hat{\theta}(\boldsymbol{X})$ of a parameter $\theta$ and a sufficient statistic $T(\boldsymbol{X})$, we can construct an improved estimator $\hat{\theta}^*(T(\boldsymbol{X}))$ by conditioning on the sufficient statistic. The improved estimator has a smaller mean squared error (MSE) than the original estimator. Mathematically, the theorem is expressed as:
 
