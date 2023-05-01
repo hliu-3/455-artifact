@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.91.2" />
+
+
+<title>Sufficiency - A Hugo website</title>
+<meta property="og:title" content="Sufficiency - A Hugo website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">12 min read</span>
+    
+
+    <h1 class="article-title">Sufficiency</h1>
+
+    
+    <span class="article-date">2023-05-01</span>
+    
+
+    <div class="article-content">
+      <h1 id="review-of-properties-of-estimators">Review of Properties of Estimators</h1>
+<h2 id="preface">Preface</h2>
+<p>Sufficiency is an important property of an estimator in statistics, which indicates that an estimator contains all the relevant information about the population parameter being estimated. Unbiasedness, efficiency, and consistency are related to sufficiency in the sense that these properties help evaluate the quality of an estimator. A sufficient estimator that is unbiased, efficient, and consistent would be considered an ideal estimator, as it would provide accurate estimates, achieve the smallest possible variance, and improve in accuracy as the sample size increases, all while using the most relevant information available in the sample data.</p>
+<h2 id="unbiasedness">Unbiasedness</h2>
+<h3 id="formal-definition">Formal Definition</h3>
+<p>Suppose that <code>\(Y_1, Y_2, \dots , Y_n\)</code> is a random sample from the continuous pdf <code>\(f_Y(y; \theta)\)</code>, where <code>\(\theta\)</code> is an unknown parameter. An estimator <code>\(\hat{\theta} [=h(Y_1, Y_2, \dots, Y_n)]\)</code> is said to be unbiased (for <code>\(\theta\)</code>) if <code>\(E(\hat{\theta}) = \theta\)</code> for all <code>\(\theta\)</code>.</p>
+<h3 id="asymptotically-unbiased">Asymptotically Unbiased</h3>
+<p>An asymptotically unbiased estimator may be biased for small sample sizes, however, as the sample increases its bias will decrease. We can connect this to our original definition of an unbiased estimator by including a limit as the sample approaches infinity.</p>
+<p><code>\(\lim\limits_{n\rightarrow\infty}E(\hat{\theta}_n)-\theta=0\)</code></p>
+<h2 id="efficiency">Efficiency</h2>
+<h3 id="relative-efficiency">Relative Efficiency</h3>
+<p>We can compare the efficiency of two unbiased estimators by finding which one has the lower variance. Let <code>\(\hat{\theta}_1\)</code> and <code>\(\hat{\theta}_2\)</code> be unbiased estimators of an unknown parameter <code>\(\theta\)</code>. If <code>\(Var(\hat{\theta}_1) &lt; Var(\hat{\theta}_2)\)</code>, then we can say that <code>\(\hat{\theta}_1\)</code> is <em>more efficient</em> than <code>\(\hat{\theta}_2\)</code>.</p>
+<h3 id="cramer-rao-lower-bound">Cramer-Rao Lower Bound</h3>
+<p><strong>Theorem</strong>: Let <code>\(Y_1, \dots Y_n\)</code>be a random sample from a continuous pdf <code>\(f_Y(y; \theta)\)</code>, and let <code>\(\hat{\theta} = g(Y_1, \dots, Y_n)\)</code> be any unbiased estimator for <code>\(\theta\)</code>. Suppose that <code>\(f_Y(y; \theta)\)</code> has continuous first- and second-order derivatives. Also, suppose that the set of y values where <code>\(f_Y(y; \theta) \neq 0\)</code> does not depend on <code>\(\theta\)</code>. Then, <code>\(Var(\hat{\theta}) \geq \frac{1}{I(\theta)}\)</code>, where <code>\(I(\theta)\)</code> is defined as <code>\(I(\theta) = E\Big[\Big(\frac{d}{d\theta}lnL(\theta)\Big)^2\Big]\)</code>.</p>
+<p>Now, we can finally define an estimator to be efficient if it achieves the lowest possible variance among all unbiased estimators for a given parameter. In other words, the estimator&rsquo;s variance will be equal to <code>\(\frac{1}{I(\theta)}\)</code>.</p>
+<h2 id="consistency">Consistency</h2>
+<p>An estimator is considered efficient if it converges in probability to the true parameter value as the sample approaches infinity. More formally, we can say that an estimator <code>\(\hat{\theta}_n = h(W_1, W_2,\dots, W_n)\)</code> is said to be <em>consistent</em> for <code>\(\theta\)</code> if it converges in probability to <code>\(\theta\)</code>, that is, if for all <code>\(\epsilon &gt; 0\)</code>, <code>\(\stackrel{lim}{n\rightarrow \infty}P(|\hat{\theta}_n-\theta|&lt;\epsilon)=1\)</code>.</p>
+<h2 id="introduction-to-sufficiency">Introduction to Sufficiency</h2>
+<p>A statistic is a function of some random sample of a population and we often use statistics as estimators for true population parameters since these parameters are almost always unknown. For any given random sample, there many functions of that random sample, so when we are looking for good estimators, should we be looking at each and every function of the random sample? No, instead we can look at a smaller subset of these functions of the random sample that give us the same amount of information as knowing the entire random sample. We call these statistics, sufficient statistics.</p>
+<p>Let&rsquo;s say we have a random sample of size <code>\(n\)</code>, <code>\(X_1, X_2, ..., X_n\)</code> from a probability distribution with an unknown parameter <code>\(\theta\)</code>, and we define a statistic <code>\(Y\)</code> as a function of this random sample:</p>
+<p><code>$$Y = u(X_1, X_2, ...,X_n)$$</code></p>
+<p><code>\(Y\)</code> is said to be sufficient for <code>\(\theta\)</code> if the conditional distribution of <code>\(X_1, X_2, ..., X_n\)</code> given the statistic <code>\(Y\)</code>, does not depend on <code>\(\theta\)</code>. In other words, <code>\(Y\)</code> is a sufficient statistic if the person who knows the value of <code>\(Y\)</code> can do just as good of a job of estimating the unknown parameter <code>\(\theta\)</code> as someone who knows the entire random sample.</p>
+<h2 id="example-of-being-sufficient">Example of Being Sufficient</h2>
+<p>This is an example of what it means for something to be sufficient. To be clear, this is not an example of a sufficient statistic.</p>
+<p>Let&rsquo;s say we roll a pair of fair dice without being allowed to view the outcome and we want to calculate the probability that the sum showing is an even number. Without any other information, the answer is <code>\(\frac{1}{2}\)</code> since the result is either even or odd. Now suppose that two other people were allowed to see the result, and let&rsquo;s say the result was 7, and each is allowed to characterize the outcome without providing us the exact sum.</p>
+<p>Person A tells us that the sum was less than or equal to 7 and person B tells us that the sum was odd. Whose information is more useful? Person B&rsquo;s information is more useful and we can calculate the conditional probabilities to see why.</p>
+<p>With person A&rsquo;s information, the conditional probability would be</p>
+<p><code>$$P(\text{sum is even}|\text{sum} \leq 7) = \frac{P(\text{sum is even} \cap \text{sum} \leq 7)}{P(\text{sum} \leq 7)} = \frac{P(2) + P(4) + P(6)}{P(2) + P(3) + P(4) + P(5) + P(6) + P(7)}$$</code></p>
+<p><code>$$= \frac{\frac{1}{36}+\frac{3}{36}+\frac{5}{36}}{\frac{1}{36} + \frac{2}{36} + \frac{3}{36} + \frac{4}{36} + \frac{5}{36} + \frac{6}{36}} = \frac{9}{21}$$</code></p>
+<p>In contrast, Person B&rsquo;s information gives us this conditional probability,</p>
+<p><code>$$P(\text{sum is even|sum is odd}) = 0$$</code></p>
+<p>Person B&rsquo;s information clearly gives us more information and actually helps us answer the question of whether the dice roll is even or odd. In this sense, person B&rsquo;s information is sufficient while person A&rsquo;s is not.</p>
+<h2 id="example-of-a-sufficient-statistic">Example of a Sufficient Statistic</h2>
+<p>To give an example of how we can use the formal definition of sufficiency to find sufficient statistics, let&rsquo;s use a Bernoulli pdf. Suppose that a random sample of size <code>\(n\)</code>, <code>\(X_1 = k_1, ..., X_n = k_n\)</code> is taken from a Bernoulli pdf,</p>
+<p><code>$$p_x (k;p) = p^k (1-p)^{1-k}, k = 0,1$$</code></p>
+<p>where <code>\(p\)</code> is an unknown parameter.</p>
+<p>From our work with MLEs we know that our maximum likelihood estimator is 
+<code>\(\hat{p} = \frac{1}{n} \sum_{i = 1}^n X_i\)</code>
+and that our maximum likelihood estimate is <code>\(p_e = \frac{1}{n} \sum_{i=1}^n k_i\)</code>.</p>
+<p>We want to show that <code>\(\hat p\)</code> is a sufficient estimator for <code>\(p\)</code> so we need to calculate the conditional probability that <code>\(X_1 = k_1,...,X_n = k_n\)</code> given that <code>\(\hat p = p_e\)</code>.</p>
+<p><code>$$P(X_1 = k_1,...,X_n=k_n | \hat p = p_e) = \frac{P(X_1 = k_1,...,X_n = k_n \cap \hat p = p_e)}{P(\hat p = p_e)}$$</code></p>
+<p><code>\(P(X_1 = k_1,...,X_n = k_n \cap \hat p = p_e = 0\)</code> if <code>\(X_i \neq k_i\)</code> since this would mean that <code>\(\hat p \neq p\)</code>. Therefore</p>
+<p><code>$$P(X_1 = k_1,...,X_n=k_n | \hat p = p_e) = \frac{P(X_1 = k_1,...,X_n = k_n)}{P(\hat p = p_e)}$$</code></p>
+<p>But,</p>
+<p><code>\(P(X_1 = k_1,...,X_n = k_n) = p^{k_1}(1-p)^{1-k_1} * ...*p^{k_n}(1-p)^{1-k_n}\)</code></p>
+<p><code>\(= p^{\sum_{i=1}^n k_i} (1-p)^{n-\sum_{i=1}^n} k_i\)</code>.</p>
+<p>We know that a Binomial distribution is the sum of individual independent Bernoulli&rsquo;s so we can re-write this probability,</p>
+<p><code>\(= p^{np_e}(1-p)^{n-np_e}\)</code>.</p>
+<p>Now for the denominator,</p>
+<p><code>\(P(\hat p = p_e) = P(\sum^n_{i=1}X_i = np_e) = ( {n \choose np_e} p^{np_e}(1-p)^{n-np_e})\)</code></p>
+<p>because of the relationship between Binomials and Bernoulli&rsquo;s mentioned above.</p>
+<p>Therefore,</p>
+<p><code>$$P(X_1 = k_1,...,X_n = k_n|\hat p = p_e) = \frac{p^{np_e}(1-p)^{n-np_e}}{{n \choose np_e} p^{np_e}(1-p)^{n-np_e}} = \frac{1}{{n \choose np_e}}$$</code></p>
+<p>Notice that this conditional probability is not a function of <code>\(p\)</code> indicating that <code>\(\hat p\)</code> is a sufficient estimator for <code>\(p\)</code>. Now in this instance, the conditional probability was easy to calculate but in most cases it will not be which is why we have the following Factorization Theorem to help us.</p>
+<h1 id="fischers-sufficiency-theorem">Fischer&rsquo;s Sufficiency Theorem</h1>
+<p>Given the definition of a sufficient statistic, we consider the immediate next-step question: how to propose, or prove, a sufficient statistic? Fisher&rsquo;s Sufficiency Theorem is a fundamental result that helps to identify sufficient statistics for a given sampling from a model. In this Section, we will explain the theorem and its implications, and then demonstrate its application using Bernoulli samples as an example.</p>
+<h2 id="fischers-sufficiency-theorem-1">Fischer&rsquo;s Sufficiency Theorem</h2>
+<p>Fisher&rsquo;s Sufficiency Theorem states that a statistic <code>\(T(\boldsymbol{X})\)</code> is sufficient for a parameter <code>\(\theta\)</code> if and only if the joint probability distribution of the data <code>\(\boldsymbol{X}\)</code> can be factored into two components:</p>
+<ol>
+<li>
+<p>A function <code>\(G(T(\boldsymbol{X}), \theta)\)</code> that depends on the data only through the sufficient statistic <code>\(T(\boldsymbol{X})\)</code>. This means that if two samples from the data of size <code>\(n\)</code> <code>\(\boldsymbol{X}=\{x_1,x_2,\cdots,x_n\}\)</code> and <code>\(\boldsymbol{Y}=\{y_1,y_2,\cdots,y_n\}\)</code></p>
+</li>
+<li>
+<p>A function <code>\(H(\boldsymbol{X})\)</code> that does not depend on the parameter <code>\(\theta\)</code>.</p>
+</li>
+</ol>
+<p>Mathematically, the theorem can be expressed as:</p>
+<p>$$
+F(\boldsymbol{X} | \theta) = G(T(\boldsymbol{X}), \theta) H(\boldsymbol{X})
+$$</p>
+<p>where <code>\(F(\boldsymbol{X} | \theta)\)</code> is the joint probability distribution of the data <code>\(\boldsymbol{X}\)</code>, and <code>\(G\)</code> and <code>\(H\)</code> are the two factorized functions.</p>
+<h2 id="likelihood-principle-interpretation">Likelihood principle interpretation</h2>
+<p>An implication of the theorem is that when using likelihood-based inference, two sets of data yielding the same value for the sufficient statistic <code>\(T(X)\)</code> will always yield the same inferences about <code>\(\theta\)</code>. By the factorization criterion, the likelihood&rsquo;s dependence on <code>\(\theta\)</code> is only in conjunction with <code>\(T(X)\)</code>. As this is the same in both cases, the dependence on θ will be the same as well, leading to identical inferences.</p>
+<h2 id="proving-sufficiency-using-fischers-sufficiency-theorem">Proving Sufficiency using Fischer&rsquo;s Sufficiency Theorem</h2>
+<p>To prove that a statistic <code>\(T(\boldsymbol{X})\)</code> is sufficient for a parameter <code>\(\theta\)</code>, we need to show that the joint probability distribution <code>\(F(\boldsymbol{X} | \theta)\)</code> can be factored into the two components mentioned above. If this factorization is possible, then we can conclude that <code>\(T(\boldsymbol{X})\)</code> is sufficient for <code>\(\theta\)</code>.</p>
+<h2 id="example-bernoulli-samples">Example: Bernoulli Samples</h2>
+<p>Let&rsquo;s consider a set of independent Bernoulli samples <code>\(\boldsymbol{X} = (X_1, X_2, ..., X_n)\)</code>, where each <code>\(X_i\)</code> has the probability mass function:</p>
+<p>$$
+f(x_i | p) = p^{x_i} (1 - p)^{1 - x_i}
+$$</p>
+<p>for <code>\(x_i \in \{0, 1\}\)</code> and <code>\(0 \le p \le 1\)</code>. Our goal is to prove that the sample sum <code>\(T(\boldsymbol{X}) = \sum_{i=1}^n X_i\)</code> is a sufficient statistic for the parameter <code>\(p\)</code>.</p>
+<p>The joint probability mass function of the Bernoulli samples <code>\(\boldsymbol{X}\)</code> is given by:</p>
+<p>$$
+f(\boldsymbol{X} | p) = \prod_{i=1}^n p^{x_i} (1 - p)^{1 - x_i}
+$$</p>
+<p>Now, we can rewrite this expression as follows:</p>
+<p>$$
+f(\boldsymbol{X} | p) = p^{\sum_{i=1}^n x_i} (1 - p)^{n - \sum_{i=1}^n x_i}
+$$</p>
+<p>This can be further factored into:</p>
+<p>$$
+f(\boldsymbol{X} | p) = p^{T(\boldsymbol{X})} (1 - p)^{n - T(\boldsymbol{X})} \cdot 1
+$$</p>
+<p>In this case, we have:</p>
+<p>$$
+G(T(\boldsymbol{X}), p) = p^{T(\boldsymbol{X})} (1 - p)^{n - T(\boldsymbol{X})}
+$$</p>
+<p>and</p>
+<p>$$
+H(\boldsymbol{X}) = 1
+$$</p>
+<p>By applying Fisher&rsquo;s Sufficiency Theorem, we can conclude that the sample sum <code>\(T(\boldsymbol{X}) = \sum_{i=1}^n X_i\)</code> is a sufficient statistic for the parameter <code>\(p\)</code>.</p>
+<p>To further illustrate the usefulness of sufficiency, let&rsquo;s consider estimating the parameter <code>\(p\)</code> using the Maximum Likelihood Estimation (MLE) method. The likelihood function for the Bernoulli samples is given by:</p>
+<p>$$
+L(p | \boldsymbol{X}) = \prod_{i=1}^n p^{x_i} (1 - p)^{1 - x_i}
+$$</p>
+<p>Taking the logarithm, we get the log-likelihood function:</p>
+<p>$$
+\log L(p | \boldsymbol{X}) = \sum_{i=1}^n x_i \log p + (1 - x_i) \log (1 - p)
+$$</p>
+<p>Taking the derivative with respect to <code>\(p\)</code> and setting it to zero, we obtain the MLE estimator for <code>\(p\)</code>:</p>
+<p>$$
+\hat{p} = \frac{T(\boldsymbol{X})}{n}
+$$</p>
+<p>This result shows that the MLE estimator of the parameter <code>\(p\)</code> depends only on the sufficient statistic <code>\(T(\boldsymbol{X})\)</code>, which further emphasizes the importance of sufficiency in statistical estimation.</p>
+<p>To conclude, Fisher&rsquo;s Sufficiency Theorem provides a powerful tool for identifying sufficient statistics in statistical models. By conditioning on sufficient statistics, we can extract all the relevant information needed for parameter estimation, thereby simplifying the estimation process and improving the quality of the estimators. The example with Bernoulli samples demonstrates the practical application of the theorem and highlights the benefits of using sufficient statistics in estimation tasks.</p>
+<h1 id="the-rao-blackwell-theorem">The Rao-Blackwell Theorem</h1>
+<p>Now that we know how to define and prove a sufficient statistic, we conclude this project by a discussion of its utility. The Rao-Blackwell Theorem  indicates that in terms of relative efficiency, a sufficient statistic always helps improve the quality of estimators. In this section, we will explain the theorem, its connection to sufficiency, and then demonstrate its application using Normal samples with a known mean and unknown variance as an example.</p>
+<h2 id="rao-blackwell-theorem">Rao-Blackwell Theorem</h2>
+<p>The Rao-Blackwell Theorem states that given an estimator <code>\(\hat{\theta}(\boldsymbol{X})\)</code> of a parameter <code>\(\theta\)</code> and a sufficient statistic <code>\(T(\boldsymbol{X})\)</code>, we can construct an improved estimator <code>\(\hat{\theta}^*(T(\boldsymbol{X}))\)</code> by conditioning on the sufficient statistic. The improved estimator has a smaller mean squared error (MSE) than the original estimator. Mathematically, the theorem is expressed as:</p>
+<p>$$
+\text{MSE}(\hat{\theta}^*(T(\boldsymbol{X}))) \le \text{MSE}(\hat{\theta}(\boldsymbol{X}))
+$$</p>
+<p>To compute the improved estimator, we calculate the conditional expectation:</p>
+<p>$$
+\hat{\theta}^*(T(\boldsymbol{X})) = \mathbb{E}[\hat{\theta}(\boldsymbol{X}) | T(\boldsymbol{X})]
+$$</p>
+<h2 id="usefulness-of-sufficiency">Usefulness of Sufficiency</h2>
+<p>The Rao-Blackwell Theorem shows the usefulness of sufficiency because it allows us to construct improved estimators by conditioning on the sufficient statistic. In other words, the sufficient statistic contains all the relevant information needed for parameter estimation, and conditioning on it helps to eliminate any unnecessary variability in the original estimator, thereby improving its MSE.</p>
+<h2 id="example-normal-samples-with-known-mean-and-unknown-variance-continued">Example: Normal Samples with Known Mean and Unknown Variance (Continued)</h2>
+<p>In the previous section, we have defined the sufficient statistic for the unknown variance <code>\(\sigma^2\)</code> as:</p>
+<p>$$
+T(\boldsymbol{X}) = \sum_{i=1}^n (X_i - \mu)^2
+$$</p>
+<p>We have also established that the sample variance estimator is:</p>
+<p>$$
+\hat{\sigma}^2(\boldsymbol{X}) = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2
+$$</p>
+<p>To apply the Rao-Blackwell Theorem and improve the estimator of the variance by conditioning on the sufficient statistic, we need to compute the conditional expectation:</p>
+<p>$$
+\hat{\sigma}^{2*}(T(\boldsymbol{X})) = \mathbb{E}[\hat{\sigma}^2(\boldsymbol{X}) | T(\boldsymbol{X})]
+$$</p>
+<p>Recall the relationship between the sum of squared deviations from the known mean and the sample variance:</p>
+<p>$$
+T(\boldsymbol{X}) = (n-1)\hat{\sigma}^2(\boldsymbol{X}) + n(\bar{X} - \mu)^2
+$$</p>
+<p>We can express <code>\(\hat{\sigma}^2(\boldsymbol{X})\)</code> as:</p>
+<p>$$
+\hat{\sigma}^2(\boldsymbol{X}) = \frac{T(\boldsymbol{X}) - n(\bar{X} - \mu)^2}{n-1}
+$$</p>
+<p>Since <code>\(\bar{X}\)</code> and <code>\(\mu\)</code> are constants, the conditional expectation is:</p>
+<p>$$
+\hat{\sigma}^{2*}(T(\boldsymbol{X})) = \mathbb{E}\left[\frac{T(\boldsymbol{X}) - n(\bar{X} - \mu)^2}{n-1} \middle| T(\boldsymbol{X})\right] = \frac{T(\boldsymbol{X}) - n(\bar{X} - \mu)^2}{n-1}
+$$</p>
+<p>As a result, the improved estimator of the variance, <code>\(\hat{\sigma}^{2*}(T(\boldsymbol{X}))\)</code>, is equal to the sample variance estimator with the sample mean replaced by the known population mean.</p>
+<p>The Rao-Blackwell Theorem guarantees that the mean squared error (MSE) of the improved estimator <code>\(\hat{\sigma}^{2*}(T(\boldsymbol{X}))\)</code> is smaller than or equal to the MSE of the original estimator <code>\(\hat{\sigma}^2(\boldsymbol{X})\)</code>. This demonstrates the usefulness of sufficiency in constructing improved estimators.</p>
+<p>In conclusion, the Rao-Blackwell Theorem provides a powerful tool for improving the quality of estimators by conditioning on sufficient statistics. The example with Normal samples illustrates the practical application of the theorem and emphasizes the benefits of using sufficient statistics in estimation tasks.</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+
