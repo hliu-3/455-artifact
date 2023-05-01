@@ -42,78 +42,44 @@ Now, we can finally define an estimator to be efficient if it achieves the lowes
 An estimator is considered efficient if it converges in probability to the true parameter value as the sample approaches infinity. More formally, we can say that an estimator `\(\hat{\theta}_n = h(W_1, W_2,\dots, W_n)\)` is said to be *consistent* for `\(\theta\)` if it converges in probability to `\(\theta\)`, that is, if for all `\(\epsilon > 0\)`, `\(\stackrel{lim}{n\rightarrow \infty}P(|\hat{\theta}_n-\theta|<\epsilon)=1\)`.
 
 
-# Introduction to Sufficiency
-
+## Introduction to Sufficiency
 A statistic is a function of some random sample of a population and we often use statistics as estimators for true population parameters since these parameters are almost always unknown. For any given random sample, there many functions of that random sample, so when we are looking for good estimators, should we be looking at each and every function of the random sample? No, instead we can look at a smaller subset of these functions of the random sample that give us the same amount of information as knowing the entire random sample. We call these statistics, sufficient statistics.
-
 Let's say we have a random sample of size `\(n\)`, `\(X_1, X_2, ..., X_n\)` from a probability distribution with an unknown parameter `\(\theta\)`, and we define a statistic `\(Y\)` as a function of this random sample:
-
 `$$Y = u(X_1, X_2, ...,X_n)$$`
-
 `\(Y\)` is said to be sufficient for `\(\theta\)` if the conditional distribution of `\(X_1, X_2, ..., X_n\)` given the statistic `\(Y\)`, does not depend on `\(\theta\)`. In other words, `\(Y\)` is a sufficient statistic if the person who knows the value of `\(Y\)` can do just as good of a job of estimating the unknown parameter `\(\theta\)` as someone who knows the entire random sample.
-
-## Example of Sufficient Statistic
-
+## Example of Being Sufficient
 This is an example of what it means for something to be sufficient. To be clear, this is not an example of a sufficient statistic.
-
 Let's say we roll a pair of fair dice without being allowed to view the outcome and we want to calculate the probability that the sum showing is an even number. Without any other information, the answer is `\(\frac{1}{2}\)` since the result is either even or odd. Now suppose that two other people were allowed to see the result, and let's say the result was 7, and each is allowed to characterize the outcome without providing us the exact sum. 
-
 Person A tells us that the sum was less than or equal to 7 and person B tells us that the sum was odd. Whose information is more useful? Person B's information is more useful and we can calculate the conditional probabilities to see why.
-
 With person A's information, the conditional probability would be
-
-`$$P(\text{sum is even}|\text{sum} \leq 7) = \frac{P(\text{sum is even} \cap \text{sum} \leq 7)}{P(\text{sum} \leq 7)} = \frac{P(2) + P(4) + P(6)}{P(2) + P(3) + P(4) + P(5) + P(6) + P(7)}$$`
-
+`$$P(\text{sum is even}|\text{sum} \leq 7) = \frac{P(\text{sum is even} \cap \text{sum} \leq 7)}{P(\text{sum} \leq 7)}$$` 
+`$$= \frac{P(2) + P(4) + P(6)}{P(2) + P(3) + P(4) + P(5) + P(6) + P(7)}$$`
 `$$= \frac{\frac{1}{36}+\frac{3}{36}+\frac{5}{36}}{\frac{1}{36} + \frac{2}{36} + \frac{3}{36} + \frac{4}{36} + \frac{5}{36} + \frac{6}{36}} = \frac{9}{21}$$`
-
 In contrast, Person B's information gives us this conditional probability,
-
 `$$P(\text{sum is even|sum is odd}) = 0$$`
-
 Person B's information clearly gives us more information and actually helps us answer the question of whether the dice roll is even or odd. In this sense, person B's information is sufficient while person A's is not.
-
 ## Example of a Sufficient Statistic
-
 To give an example of how we can use the formal definition of sufficiency to find sufficient statistics, let's use a Bernoulli pdf. Suppose that a random sample of size `\(n\)`, `\(X_1 = k_1, ..., X_n = k_n\)` is taken from a Bernoulli pdf,
-
 `$$p_x (k;p) = p^k (1-p)^{1-k}, k = 0,1$$`
-
 where `\(p\)` is an unknown parameter.
-
 From our work with MLEs we know that our maximum likelihood estimator is 
 `\(\hat{p} = \frac{1}{n} \sum_{i = 1}^n X_i\)`
 and that our maximum likelihood estimate is `\(p_e = \frac{1}{n} \sum_{i=1}^n k_i\)`.
-
 We want to show that `\(\hat p\)` is a sufficient estimator for `\(p\)` so we need to calculate the conditional probability that `\(X_1 = k_1,...,X_n = k_n\)` given that `\(\hat p = p_e\)`.
-
 `$$P(X_1 = k_1,...,X_n=k_n | \hat p = p_e) = \frac{P(X_1 = k_1,...,X_n = k_n \cap \hat p = p_e)}{P(\hat p = p_e)}$$`
-
-`\(P(X_1 = k_1,...,X_n = k_n \cap \hat p = p_e = 0\)` if `\(X_i \neq k_i\)` since this would mean that `\(\hat p \neq p\)`. Therefore
-
+`\(P(X_1 = k_1,...,X_n = k_n \cap \hat p = p_e) = 0\)` if `\(X_i \neq k_i\)` since this would mean that `\(\hat p \neq p_e\)`. Therefore
 `$$P(X_1 = k_1,...,X_n=k_n | \hat p = p_e) = \frac{P(X_1 = k_1,...,X_n = k_n)}{P(\hat p = p_e)}$$`
-
 But,
-
 `\(P(X_1 = k_1,...,X_n = k_n) = p^{k_1}(1-p)^{1-k_1} * ...*p^{k_n}(1-p)^{1-k_n}\)`
-
-`\(= p^{\sum_{i=1}^n k_i} (1-p)^{n-\sum_{i=1}^n} k_i\)`.
-
+$ = p^{\sum_{i=1}^n k_i} (1-p)^{n-\sum_{i=1}^n} k_i$.
 We know that a Binomial distribution is the sum of individual independent Bernoulli's so we can re-write this probability,
-
-`\(= p^{np_e}(1-p)^{n-np_e}\)`.
-
+$ = p^{np_e}(1-p)^{n-np_e}$.
 Now for the denominator,
-
 `\(P(\hat p = p_e) = P(\sum^n_{i=1}X_i = np_e) = ( {n \choose np_e} p^{np_e}(1-p)^{n-np_e})\)`
-
 because of the relationship between Binomials and Bernoulli's mentioned above.
-
 Therefore,
-
 `$$P(X_1 = k_1,...,X_n = k_n|\hat p = p_e) = \frac{p^{np_e}(1-p)^{n-np_e}}{{n \choose np_e} p^{np_e}(1-p)^{n-np_e}} = \frac{1}{{n \choose np_e}}$$`
-
 Notice that this conditional probability is not a function of `\(p\)` indicating that `\(\hat p\)` is a sufficient estimator for `\(p\)`. Now in this instance, the conditional probability was easy to calculate but in most cases it will not be which is why we have the following Factorization Theorem to help us.
-
 
 # Fischer's Factorization Theorem
 
