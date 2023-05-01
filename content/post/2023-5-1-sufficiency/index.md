@@ -52,7 +52,7 @@ Let's say we have a random sample of size `\(n\)`, `\(X_1, X_2, ..., X_n\)` from
 
 `\(Y\)` is said to be sufficient for `\(\theta\)` if the conditional distribution of `\(X_1, X_2, ..., X_n\)` given the statistic `\(Y\)`, does not depend on `\(\theta\)`. In other words, `\(Y\)` is a sufficient statistic if the person who knows the value of `\(Y\)` can do just as good of a job of estimating the unknown parameter `\(\theta\)` as someone who knows the entire random sample.
 
-## Example of Being Sufficient
+## Example of Sufficient Statistic
 
 This is an example of what it means for something to be sufficient. To be clear, this is not an example of a sufficient statistic.
 
@@ -134,6 +134,8 @@ F(\boldsymbol{X} | \theta) = G(T(\boldsymbol{X}), \theta) H(\boldsymbol{X})
 $$
 
 where `\(F(\boldsymbol{X} | \theta)\)` is the joint probability distribution of the data `\(\boldsymbol{X}\)`, and `\(G\)` and `\(H\)` are the two factorized functions.
+
+Note that if we are given a non-zero constant `\(c\)`, such that `$$G(T(\boldsymbol{X}) = G(cT^\prime(\boldsymbol{X})$$`, then `\(T^\prime(x)\)` is also a sufficient statistic. One constant that is often used is the size of the sample `\(n\)`, which we can assume to be constant. 
 
 ## Likelihood principle interpretation
 
