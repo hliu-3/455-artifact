@@ -60,6 +60,7 @@ $$= \frac{\frac{1}{36}+\frac{3}{36}+\frac{5}{36}}{\frac{1}{36} + \frac{2}{36} + 
 In contrast, Person B's information gives us this conditional probability,
 $$P(\text{sum is even|sum is odd}) = 0$$
 Person B's information clearly gives us more information and actually helps us answer the question of whether the dice roll is even or odd. In this sense, person B's information is sufficient while person A's is not.
+
 ## Example of a Sufficient Statistic
 To give an example of how we can use the formal definition of sufficiency to find sufficient statistics, let's use a Bernoulli pdf. Suppose that a random sample of size $n$, $X_1 = k_1, ..., X_n = k_n$ is taken from a Bernoulli pdf,
 $$p_x (k;p) = p^k (1-p)^{1-k}, k = 0,1$$
@@ -108,7 +109,9 @@ Note that if we are given a non-zero constant $c$, such that $$G(T(\boldsymbol{X
 ## Likelihood principle interpretation
 
 
-An implication of the theorem is that when using likelihood-based inference, two sets of data yielding the same value for the sufficient statistic $T(X)$ will always yield the same inferences about $\theta$. By the factorization criterion, the likelihood's dependence on $\theta$ is only in conjunction with $T(X)$. As this is the same in both cases, the dependence on θ will be the same as well, leading to identical inferences.
+An implication of the theorem is that when using likelihood-based inference, two sets of data yielding the same value for the sufficient statistic $T(X)$ will always yield the same inferences about $\theta$. By the factorization criterion, the likelihood's dependence on $\theta$ is only in conjunction with $T(X)$. As this is the same in both cases, the dependence on $\theta$ will be the same as well, leading to identical inferences.
+
+Recall that the likelihood function is the joint probability of the observed data viewed as a function of the parameters. Thus, the factorization theorem can be applied to likelihood based methods. Incidentally, if we want to derive a Maximum Likelihood Estimator by taking the logarithm of the likelihood function and take its derivative, the part only containing $\boldsymbol{X}$, will vanish. 
 
 ## Proving Sufficiency using Fischer's Factorization Theorem
 
@@ -154,7 +157,7 @@ $$
 H(\boldsymbol{X}) = 1
 $$
 
-By applying Fisher's Sufficiency Theorem, we can conclude that the sample sum $T(\boldsymbol{X}) = \sum_{i=1}^n X_i$ is a sufficient statistic for the parameter $p$.
+By applying Fisher's Sufficiency Theorem, we can conclude that the sample sum $T(\boldsymbol{X}) = \sum_{i=1}^n X_i$ is a sufficient statistic for the parameter $p$. 
 
 To further illustrate the usefulness of sufficiency, let's consider estimating the parameter $p$ using the Maximum Likelihood Estimation (MLE) method. The likelihood function for the Bernoulli samples is given by:
 
@@ -196,9 +199,10 @@ $$
 \hat{\theta}^*(T(\boldsymbol{X})) = \mathbb{E}[\hat{\theta}(\boldsymbol{X}) | T(\boldsymbol{X})]
 $$
 
-## Usefulness of Sufficiency
+## Utility of Sufficiency
 
-The Rao-Blackwell Theorem shows the usefulness of sufficiency because it allows us to construct improved estimators by conditioning on the sufficient statistic. In other words, the sufficient statistic contains all the relevant information needed for parameter estimation, and conditioning on it helps to eliminate any unnecessary variability in the original estimator, thereby improving its MSE.
+The Rao-Blackwell Theorem demonstrates the utility of sufficiency in that it allows us to construct improved estimators by conditioning on the sufficient statistic. In other words, the sufficient statistic contains all the relevant information needed for parameter estimation, and conditioning on it helps to eliminate any unnecessary variability in the original estimator, thereby improving its MSE.
+
 ## Example: Normal Samples with Known Mean and Unknown Variance (Continued)
 
 In the previous section, we have defined the sufficient statistic for the unknown variance $\sigma^2$ as:
@@ -239,6 +243,4 @@ $$
 
 As a result, the improved estimator of the variance, $\hat{\sigma}^{2*}(T(\boldsymbol{X}))$, is equal to the sample variance estimator with the sample mean replaced by the known population mean.
 
-The Rao-Blackwell Theorem guarantees that the mean squared error (MSE) of the improved estimator $\hat{\sigma}^{2*}(T(\boldsymbol{X}))$ is smaller than or equal to the MSE of the original estimator $\hat{\sigma}^2(\boldsymbol{X})$. This demonstrates the usefulness of sufficiency in constructing improved estimators.
-
-In conclusion, the Rao-Blackwell Theorem provides a powerful tool for improving the quality of estimators by conditioning on sufficient statistics. The example with Normal samples illustrates the practical application of the theorem and emphasizes the benefits of using sufficient statistics in estimation tasks.
+The Rao-Blackwell Theorem guarantees that the mean squared error (MSE) of the improved estimator $\hat{\sigma}^{2*}(T(\boldsymbol{X}))$ is smaller than or equal to the MSE of the original estimator $\hat{\sigma}^2(\boldsymbol{X})$. This demonstrates the usefulness of sufficiency in constructing improved estimators. The example with Normal samples illustrates the practical application of the theorem and emphasizes the benefits of using sufficient statistics in estimation tasks.
