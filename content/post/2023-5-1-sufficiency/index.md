@@ -233,11 +233,11 @@ $$
 
 Due to each `\(X_i\)` being independent and individually distributed,
 
-\$\$
-
-`\begin{align}  & \hat{\lambda}^{*}(\boldsymbol{X}) = \mathbb{E}[\hat{\lambda}_1 | T(\boldsymbol{X})]\\ & = \frac{1}{n} \mathbb{E}\left[\sum_{i=1}^nX_i\mid T(\boldsymbol{X}) = t \right] \\ &= \frac{1}{n} \mathbb{E}\left[T(\boldsymbol{X})\mid T(\boldsymbol{X}) = t \right] \\&= \frac{t}{n} \\&= \frac{1}{n} \sum_{i=1}^n X_i \\ &= \bar{X} \end{align}`
-
-\$\$
+$$
+`\begin{align}
+ & \hat{\lambda}^{*}(\boldsymbol{X}) = \mathbb{E}[\hat{\lambda}_1 | T(\boldsymbol{X})]\\ & = \frac{1}{n} \mathbb{E}\left[\sum_{i=1}^nX_i\mid T(\boldsymbol{X}) = t \right] \\ &= \frac{1}{n} \mathbb{E}\left[T(\boldsymbol{X})\mid T(\boldsymbol{X}) = t \right] \\&= \frac{t}{n} \\&= \frac{1}{n} \sum_{i=1}^n X_i \\ &= \bar{X}
+\end{align}`
+$$
 
 This yields the Maximum Likelihood Estimator for `\(\lambda\)`, which is better in terms of relative sufficiency, as it meets the Cramer-Rao Lower Bound.
 
