@@ -200,51 +200,61 @@ $$
 \hat{\theta}^*(T(\boldsymbol{X})) = \mathbb{E}[\hat{\theta}(\boldsymbol{X}) | T(\boldsymbol{X})]
 $$
 
-## Utility of Sufficiency
+We will provide the following example to illustrate how Rao-Blackwell Theorem can improve the estimation, by attempting to estimate a sequence of Poisson distributed random variables (RVs) with unknown parameter $\lambda$. We will start with a "wild" estimator, $X_1$, which is the first random variable, and then apply the Rao-Blackwell Theorem to obtain an improved estimator.
 
-The Rao-Blackwell Theorem demonstrates the utility of sufficiency in that it allows us to construct improved estimators by conditioning on the sufficient statistic. In other words, the sufficient statistic contains all the relevant information needed for parameter estimation, and conditioning on it helps to eliminate any unnecessary variability in the original estimator, thereby improving its MSE.
+In this example, we will apply the Rao-Blackwell Theorem to improve the estimation of the parameter of a sequence of Poisson distributed random variables (RVs) with an unknown parameter. We will start with a "wild" estimator, $X_1$, which is the value of the first RV, and then apply the Rao-Blackwell Theorem to obtain an improved estimator.
 
-## Example: Normal Samples with Known Mean and Unknown Variance (Continued)
 
-In the previous section, we have defined the sufficient statistic for the unknown variance $\sigma^2$ as:
-
-$$
-T(\boldsymbol{X}) = \sum_{i=1}^n (X_i - \mu)^2
-$$
-
-We have also established that the sample variance estimator is:
+Let's consider a set of independent Poisson distributed samples $\boldsymbol{X} = (X_1, X_2, ..., X_n)$, where each $X_i$ has the probability mass function:
 
 $$
-\hat{\sigma}^2(\boldsymbol{X}) = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2
+P(X_i = k | \lambda) = \frac{e^{-\lambda} \lambda^k}{k!}
 $$
 
-To apply the Rao-Blackwell Theorem and improve the estimator of the variance by conditioning on the sufficient statistic, we need to compute the conditional expectation:
+with an unknown parameter $\lambda > 0$. Our goal is to estimate the parameter $\lambda$.
+
+Let's define the intentionally "wild" estimator as the value of the first RV:
 
 $$
-\hat{\sigma}^{2*}(T(\boldsymbol{X})) = \mathbb{E}[\hat{\sigma}^2(\boldsymbol{X}) | T(\boldsymbol{X})]
+\hat{\lambda}_1 = X_1
 $$
 
-Recall the relationship between the sum of squared deviations from the known mean and the sample variance:
+Notice that this estimator has a high variance, as it only considers the first RV and ignores the information from the remaining samples.
+
+Then, we need to identify a sufficient statistic for the unknown parameter $\lambda$. According to the Factorization Theorem, the sum of Poisson distributed RVs is a sufficient statistic:
 
 $$
-T(\boldsymbol{X}) = (n-1)\hat{\sigma}^2(\boldsymbol{X}) + n(\bar{X} - \mu)^2
+T(\boldsymbol{X}) = \sum_{i=1}^n X_i
 $$
 
-We can express $\hat{\sigma}^2(\boldsymbol{X})$ as:
+Next, we need to compute the conditional expectation of the "wild" estimator given the sufficient statistic:
 
 $$
-\hat{\sigma}^2(\boldsymbol{X}) = \frac{T(\boldsymbol{X}) - n(\bar{X} - \mu)^2}{n-1}
+\hat{\lambda}^{*}(\boldsymbol{X}) = \mathbb{E}[\hat{\lambda}_1 | T(\boldsymbol{X})]
 $$
 
-Since $\bar{X}$ and $\mu$ are constants, the conditional expectation is:
+Note that $T(X)$ is also Poisson Distributed,
 
 $$
-\hat{\sigma}^{2*}(T(\boldsymbol{X})) = \mathbb{E}\left[\frac{T(\boldsymbol{X}) - n(\bar{X} - \mu)^2}{n-1} \middle| T(\boldsymbol{X})\right] = \frac{T(\boldsymbol{X}) - n(\bar{X} - \mu)^2}{n-1}
+\begin{align}
+ & \sum_{i=1}^n \mathbb{E}[X_i\mid T(\boldsymbol{X}) = t] \\ &=   \mathbb{E}\left[\sum_{i=1}^nX_i\mid T(\boldsymbol{X}) = t \right] \\ &= \mathbb{E}\left[T(\boldsymbol{X})\mid T(\boldsymbol{X}) = t \right] \\&= t
+\end{align}
 $$
 
-As a result, the improved estimator of the variance, $\hat{\sigma}^{2*}(T(\boldsymbol{X}))$, is equal to the sample variance estimator with the sample mean replaced by the known population mean.
+Due to each $X_i$ being independent and individually distributed, 
 
-The Rao-Blackwell Theorem guarantees that the mean squared error (MSE) of the improved estimator $\hat{\sigma}^{2*}(T(\boldsymbol{X}))$ is smaller than or equal to the MSE of the original estimator $\hat{\sigma}^2(\boldsymbol{X})$. This demonstrates the usefulness of sufficiency in constructing improved estimators. The example with Normal samples illustrates the practical application of the theorem and emphasizes the benefits of using sufficient statistics in estimation tasks.
+$$
+
+\begin{align}
+ & \hat{\lambda}^{*}(\boldsymbol{X}) = \mathbb{E}[\hat{\lambda}_1 | T(\boldsymbol{X})]\\ & = \frac{1}{n} \mathbb{E}\left[\sum_{i=1}^nX_i\mid T(\boldsymbol{X}) = t \right] \\ &= \frac{1}{n} \mathbb{E}\left[T(\boldsymbol{X})\mid T(\boldsymbol{X}) = t \right] \\&= \frac{t}{n} \\&= \frac{1}{n} \sum_{i=1}^n X_i \\ &= \bar{X}
+\end{align}
+
+$$
+
+This yields the Maximum Likelihood Estimator for $\lambda$, which is better in terms of relative sufficiency, as it meets the Cramer-Rao Lower Bound. 
+
+The Rao-Blackwell Theorem guarantees that the mean squared error (MSE) of the improved estimator $\hat{\lambda}^{*}(\boldsymbol{X})$ is smaller than or equal to the MSE of the original "wild" estimator $\hat{\lambda}_1$. 
+
 
 # References:
 
