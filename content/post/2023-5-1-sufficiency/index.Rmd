@@ -1,6 +1,7 @@
 ---
 title: "Sufficiency"
-author: "Ting Huang, Hongyi Liu, Alex McCreight "
+author: "Ting Huang, Hongyi Liu, Alex McCreight"
+bibliography: ref.bib
 date: 2023-05-01
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
@@ -244,3 +245,8 @@ $$
 As a result, the improved estimator of the variance, $\hat{\sigma}^{2*}(T(\boldsymbol{X}))$, is equal to the sample variance estimator with the sample mean replaced by the known population mean.
 
 The Rao-Blackwell Theorem guarantees that the mean squared error (MSE) of the improved estimator $\hat{\sigma}^{2*}(T(\boldsymbol{X}))$ is smaller than or equal to the MSE of the original estimator $\hat{\sigma}^2(\boldsymbol{X})$. This demonstrates the usefulness of sufficiency in constructing improved estimators. The example with Normal samples illustrates the practical application of the theorem and emphasizes the benefits of using sufficient statistics in estimation tasks.
+
+# References:
+
+[@casella2021statistical]
+[@larsen2013introduction]
